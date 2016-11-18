@@ -2,79 +2,80 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
     <title>Orders Plaque Template</title>
-    <style>
-    
-    </style>
   </head>
   <body>
     <main>
-      <table id="patientInfoTable" border="1">
-        <tr>
-          <th>Patient Name</th>
-          <th>DOB</th>
-          <th>MR#</th>
-        </tr>
-        <tr>
-          <td>Patrick A. Armstrong</td>
-          <td>11/16/20XX</td>
-          <td>1116</td>
-        </tr>
-        <tr>
-          <th>Allergies</th>
-          <th>Height(cm)</th>
-          <th>Admission Weight(kg)</th>
-        </tr>
-        <tr>
-          <td>NKDA</td>
-          <td>177.5</td>
-          <td>109</td>
-        </tr>
-      </table>
+      <section><!--Patient Information Section-->
+        <table id="patientInfoTable">
+          <tr>
+            <th>Patient Name</th>
+            <th>DOB</th>
+            <th>MR#</th>
+          </tr>
+          <tr>
+            <td>Patrick A. Armstrong</td>
+            <td>11/16/20XX</td>
+            <td>1116</td>
+          </tr>
+          <tr>
+            <th>Allergies</th>
+            <th>Height(cm)</th>
+            <th>Admission Weight(kg)</th>
+          </tr>
+          <tr>
+            <td>NKDA</td>
+            <td>177.5</td>
+            <td>109</td>
+          </tr>
+        </table>
+      </section><!-- END Patient Information Section-->
       
-      <h1>Provider Orders</h1>
-      
-      <table id="ordersTable" border="1">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Order</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Today</td>
-            <td>Now</td>
-            <td>STAT Duoneb now with peak flow and FEV1 pre- and post-</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>treatment; May repeat Q20 minutes x 3</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Notify MD if peak flow or FEV1 &lt; 40% of predicted</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Monitor vital signs and alertness at least every 20 minutes</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Electronically signed, James Emerson, M.D.</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
+      <section><!--Orders Section-->
+        <h1>Provider Orders</h1>
+        <table id="ordersTable">
+          <thead>
+            <tr>
+              <th id="colDate">Date</th>
+              <th id="colTime">Time</th>
+              <th id="colOrder">Order</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Today</td>
+              <td>Now</td>
+              <td>STAT Duoneb now with peak flow and FEV1 pre- and post-</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>treatment; May repeat Q20 minutes x 3</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Notify MD if peak flow or FEV1 &lt; 40% of predicted</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Monitor vital signs and alertness at least every 20 minutes</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Electronically signed, James Emerson, M.D.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </section><!--END Orders Section-->
     </main>
   </body>
 </html>
