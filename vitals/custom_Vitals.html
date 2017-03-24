@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    <title>Vitals</title>
+
+    <link href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=polnbfv" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.wisc-online.com/ARISE_Files/JS/fastClickJS.js?random=laasdsdkj"></script>
+  </head>
+<body id="vitals">
+  <main>
+    <form>
+      <table id="patientInfoTable">
+        <tr>
+          <th>Patient Name</th>
+          <th>DOB</th>
+          <th>MR#</th>
+        </tr>
+        <tr>
+          <td><span id="ptntNameOutput"></span></td>
+          <td><span id="ptntDOBOutput"></span></td>
+          <td><span id="ptntMROutput"></span></td>
+        </tr>
+        <tr>
+          <th>Allergies</th>
+          <th>Height(cm)</th>
+          <th>Admission Weight(kg)</th>
+        </tr>
+        <tr>
+          <td><span id="ptntAllergyOutput"></span></td>
+          <td><span id="ptntHeightOutput"></span></td>
+          <td><span id="ptntWeightOutput"></span></td>
+        </tr>
+      </table>
+
+      <h1>Vital Entry Form</h1>
+
+      <table id="vitalsForm">
+        <tr>
+          <th class="title">Vitals</th>
+          <th>Previous</th>
+          <th>Enter New</th>
+        </tr>
+        <tr>
+          <td class="title">Pulse (bpm)</td>
+          <td><span id="pulseOutput"></span></td>
+          <td>
+            <input id="field-pulse" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">Resp. Rate (/min)</td>
+          <td><span id="respRateOutput"></span></td>
+          <td>
+            <input id="field-respiratory-rate" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">BP Systolic (mmHg)</td>
+          <td><span id="bpTopOutput"></span></td>
+          <td>
+            <input id="field-blood-pressure-top" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">BP Diastolic (mmHg)</td>
+          <td><span id="bpBottomOutput"></span></td>
+          <td>
+            <input id="field-blood-pressure-bottom" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">Temperature (&deg;C)</td>
+          <td><span id="tempOutput"></span></td>
+          <td>
+            <input id="field-temperature" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">O<sup>2</sup> (%)</td>
+          <td><span id="o2OutPut"></span></td>
+          <td>
+            <input id="field-oxygen" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">Oxygen</td>
+          <td class="title" colspan="2">
+            <input type="radio" name="oxygen" value="roomAir" id="roomAir">R/A
+            <input type="radio" name="oxygen" value="o2Applied" id="radO2app"> O<sup>2</sup> Applied
+          </td>
+        </tr>
+        <!-- DO NOT CHANGE NAME OF id="o2Options"; CRITICAL TO JAVASCIPT FUNCTIONALITY -->
+        <tr id="o2Options">
+          <td class="title" rowspan ="2">
+            <input type="radio" name="oxygenType" value="NC" id="radNC">NC<br>
+            <input type="radio" name="oxygenType" value="simpleMask" id="radSimpleMask">Simple Mask<br>
+            <input type="radio" name="oxygenType" value="ventiMask" id="radVentiMask">Venti Mask<br>
+            <input type="radio" name="oxygenType" value="NRB" id="radNRB">NRB<br>
+            <input type="radio" name="oxygenType" value="bipap" id="radBiPap">BiPap<br>
+            <input type="radio" name="oxygenType" value="ventilator" id="radVentilator">Ventilator
+          </td>
+          <td>
+            <span id="fio2Output"></span>
+          </td>
+          <td style="height: 60px;">
+            <input type="number" value="0" id="field-fio2" class="oxygenInputs"> O<sup>2</sup>%
+          </td>
+        </tr>
+        <!-- DO NOT CHANGE NAME OF id="lpmOption"; CRITICAL TO JAVASCIPT FUNCTIONALITY -->
+        <tr id="lpmOption">
+          <td>
+            <span id="lpmOutput"></span>
+          </td>
+          <td>
+            <input type="number" value="0" id="field-lpm" class="oxygenInputs"> L/Min<br>
+          </td>
+        </tr>
+        <tr>
+          <td class="title">Pain (1-10)</td>
+          <td><span id="painOutput"></span></td>
+          <td>
+            <input id="field-pain" type="number" value="0">
+          </td>
+        </tr>
+      </table>
+      <button id="button-submit" type="button">Submit</button>
+      <p>
+        <span id="feedback"></span>
+      </p>
+    </form>
+  </main>
+  <script type="text/javascript" src="https://www.wisc-online.com/ARISE_Files/JS/vitalsJS.js"></script>
+</body>
+</html>
