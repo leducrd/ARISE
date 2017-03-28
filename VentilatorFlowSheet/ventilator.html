@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    <title>Vitals</title>
+
+    <link href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=polsdfdfnbfv" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.wisc-online.com/ARISE_Files/JS/fastClickJS.js?random=jkpllosdp"></script>
+  </head>
+<body>
+  <main class="ventilator">
+    <form>
+      <table id="patientInfoTable">
+        <tr>
+          <th>Patient Name</th>
+          <th>DOB</th>
+          <th>MR#</th>
+        </tr>
+        <tr>
+          <td><span id="ptntNameOutput"></span></td>
+          <td><span id="ptntDOBOutput"></span></td>
+          <td><span id="ptntMROutput"></span></td>
+        </tr>
+        <tr>
+          <th>Allergies</th>
+          <th>Height(cm)</th>
+          <th>Admission Weight(kg)</th>
+        </tr>
+        <tr>
+          <td><span id="ptntAllergyOutput"></span></td>
+          <td><span id="ptntHeightOutput"></span></td>
+          <td><span id="ptntWeightOutput"></span></td>
+        </tr>
+      </table>
+
+      <h1>Respiratory Therapy - Ventilator Care Flowsheet</h1>
+      <p id="respNotification">* Blank field = not assessed *</p>
+      <!-- Begin Patent Assessment Table -->
+      <table id="ventPtntAssess" class="ventTables">
+        <tr>
+          <th>Patient Assessment</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">Now</th>
+          <th class="ventTimeCol">Enter New</th>
+        </tr>
+        <tr>
+          <td>Heart Rate</td>
+          <td></td>
+          <td></td>
+          <td><span id="pulseOutput"></span></td>
+          <td>
+            <input id="field-pulse" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>Respiratory Rate</td>
+          <td></td>
+          <td></td>
+          <td><span id="respRateOutput"></span></td>
+          <td>
+            <input id="field-respiratory-rate" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>BP Systolic</td>
+          <td></td>
+          <td></td>
+          <td><span id="bpTopOutput"></span></td>
+          <td>
+            <input id="field-blood-pressure-top" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>BP Diastolic</td>
+          <td></td>
+          <td></td>
+          <td><span id="bpBottomOutput"></span></td>
+          <td>
+            <input id="field-blood-pressure-bottom" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>Temperature (&deg;C)</td>
+          <td></td>
+          <td></td>
+          <td><span id="tempOutput"></span></td>
+          <td>
+            <input id="field-temperature" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>O<sup>2</sup> Saturation (%)</td>
+          <td></td>
+          <td></td>
+          <td><span id="o2OutPut"></span></td>
+          <td>
+            <input id="field-oxygen" type="number" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>Level of Consciousness</td>
+          <td></td>
+          <td></td>
+          <td><span id="locOutput"></span></td>
+          <td>
+            <select id="dropConscious">
+              <option value="null"></option>
+              <option value="alert">Alert</option>
+              <option value="confused">Confused</option>
+              <option value="drowsy">Drowsy</option>
+              <option value="lethargic">Lethargic</option>
+              <option value="obtunded">Obtunded</option>
+              <option value="comatose">Comatose</option>
+              <option value="sedated">Sedated</option>
+              <option value="paralyzed">Paralyzed</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Color</td>
+          <td></td>
+          <td></td>
+          <td><span id="ptntColorOutput"></span></td>
+          <td>
+            <select id="dropPtntColor">
+              <option value="null"></option>
+              <option value="normal">Normal for Skin tone</option>
+              <option value="pale">Pale</option>
+              <option value="flushed">Flushed</option>
+              <option value="red">Red</option>
+              <option value="yellowish">Yellowish</option>
+              <option value="orangey">Orangey</option>
+              <option value="bluish">Bluish</option>
+              <option value="other">Other - See progress notes</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Lung Sounds – RUL	</td>
+          <td></td>
+          <td></td>
+          <td><span id="lungRulOutput"></span></td>
+          <td>
+            <select id="dropLungRul">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="diminished">Diminished</option>
+              <option value="crackles">Crackles</option>
+              <option value="courseCrackles">Course Crackles</option>
+              <option value="fineCrackles">Fine Crackles</option>
+              <option value="wheezes">Wheezes</option>
+              <option value="inspiratoryWheezes">Inspiratory Wheezes</option>
+              <option value="expiratoryWheezes">Expiratory Wheezes</option>
+              <option value="stridor">Stridor</option>
+              <option value="rub">Rub</option>
+              <option value="bronchial">Bronchial</option>
+              <option value="gurgles">Gurgles</option>
+              <option value="absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Lung Sounds – RML	</td>
+          <td></td>
+          <td></td>
+          <td><span id="lungRmlOutput"></span></td>
+          <td>
+            <select id="dropLungRml">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="diminished">Diminished</option>
+              <option value="crackles">Crackles</option>
+              <option value="courseCrackles">Course Crackles</option>
+              <option value="fineCrackles">Fine Crackles</option>
+              <option value="wheezes">Wheezes</option>
+              <option value="inspiratoryWheezes">Inspiratory Wheezes</option>
+              <option value="expiratoryWheezes">Expiratory Wheezes</option>
+              <option value="stridor">Stridor</option>
+              <option value="rub">Rub</option>
+              <option value="bronchial">Bronchial</option>
+              <option value="gurgles">Gurgles</option>
+              <option value="absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Lung Sounds – RLL	</td>
+          <td></td>
+          <td></td>
+          <td><span id="lungRllOutput"></span></td>
+          <td>
+            <select id="dropLungRll">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="diminished">Diminished</option>
+              <option value="crackles">Crackles</option>
+              <option value="courseCrackles">Course Crackles</option>
+              <option value="fineCrackles">Fine Crackles</option>
+              <option value="wheezes">Wheezes</option>
+              <option value="inspiratoryWheezes">Inspiratory Wheezes</option>
+              <option value="expiratoryWheezes">Expiratory Wheezes</option>
+              <option value="stridor">Stridor</option>
+              <option value="rub">Rub</option>
+              <option value="bronchial">Bronchial</option>
+              <option value="gurgles">Gurgles</option>
+              <option value="absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Lung Sounds – LUL	</td>
+          <td></td>
+          <td></td>
+          <td><span id="lungLulOutput"></span></td>
+          <td>
+            <select id="dropLungLul">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="diminished">Diminished</option>
+              <option value="crackles">Crackles</option>
+              <option value="courseCrackles">Course Crackles</option>
+              <option value="fineCrackles">Fine Crackles</option>
+              <option value="wheezes">Wheezes</option>
+              <option value="inspiratoryWheezes">Inspiratory Wheezes</option>
+              <option value="expiratoryWheezes">Expiratory Wheezes</option>
+              <option value="stridor">Stridor</option>
+              <option value="rub">Rub</option>
+              <option value="bronchial">Bronchial</option>
+              <option value="gurgles">Gurgles</option>
+              <option value="absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Lung Sounds – LLL	</td>
+          <td></td>
+          <td></td>
+          <td><span id="lungLllOutput"></span></td>
+          <td>
+            <select id="dropLungLll">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="diminished">Diminished</option>
+              <option value="crackles">Crackles</option>
+              <option value="courseCrackles">Course Crackles</option>
+              <option value="fineCrackles">Fine Crackles</option>
+              <option value="wheezes">Wheezes</option>
+              <option value="inspiratoryWheezes">Inspiratory Wheezes</option>
+              <option value="expiratoryWheezes">Expiratory Wheezes</option>
+              <option value="stridor">Stridor</option>
+              <option value="rub">Rub</option>
+              <option value="bronchial">Bronchial</option>
+              <option value="gurgles">Gurgles</option>
+              <option value="absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <!-- End Patent Assessment Table -->
+      
+      <br>
+      
+      <!-- Begin Airway Assessment Table -->
+      <table id="ventAirwayAssess" class="ventTables">
+        <tr>
+          <th class="ventTableHead">Airway Assessment</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">Now</th>
+          <th class="ventTimeCol">Enter New</th>
+        </tr>
+        <tr>
+          <td>Airway/Mask Type	</td>
+          <td></td>
+          <td></td>
+          <td><span id="maskTypeOutput"></span></td>
+          <td>
+            <select id="dropMaskType">
+              <option value="null"></option>
+              <option value="endotrachealTube">Endotracheal Tube</option>
+              <option value="tracheostomyTube">Tracheostomy Tube</option>
+              <option value="fullFaceMask">Full Face Mask</option>
+              <option value="nasalMask">Nasal Mask</option>
+              <option value="totalFaceMask">Total Face Mask</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Airway/Mask Size	</td>
+          <td></td>
+          <td></td>
+          <td><span id="maskSizeOutput"></span></td>
+          <td>
+            <select id="dropMaskSize">
+              <option value="null"></option>
+              <option value="2.5">2.5</option>
+              <option value="3.0">3.0</option>
+              <option value="3.5">3.5</option>
+              <option value="4.0">4.0</option>
+              <option value="4.5">4.5</option>
+              <option value="5.0">5.0</option>
+              <option value="5.5">5.5</option>
+              <option value="6.0">6.0</option>
+              <option value="6.5">6.5</option>
+              <option value="7.0">7.0</option>
+              <option value="7.5">7.5</option>
+              <option value="8.0">8.0</option>
+              <option value="8.5">8.5</option>
+              <option value="9.0">9.0</option>
+              <option value="9.5">9.5</option>
+              <option value="10.0">10.0</option>
+              <option value="extrasmall">Extra Small</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="extraLarge">Extra Large</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>ETT Location</td>
+          <td></td>
+          <td></td>
+          <td><span id="ettLocOutput"></span></td>
+          <td>
+            <select id="dropEttLoc">
+              <option value="null"></option>
+              <option value="right">Right</option>
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>ETT Relocated </td>
+          <td></td>
+          <td></td>
+          <td><span id="ettRelocOutput"></span></td>
+          <td>
+            <select id="dropEttReloc">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Secure &amp; Patent </td>
+          <td></td>
+          <td></td>
+          <td><span id="securePatentOutput"></span></td>
+          <td>
+            <input type="checkbox" id="cbxSecurePatent" value="cbxSecurePatent">
+          </td>
+        </tr>
+        <tr>
+          <td>Cuff Pressure	</td>
+          <td></td>
+          <td></td>
+          <td><span id="cuffPressureOutput"></span></td>
+          <td>
+            <select id="dropCuffPressure" onchange="displayCuffPressureRange(this.value)">
+              <option value="null"></option>
+              <option value="minimalLeak">Minimal Leak</option>
+              <option value="minimalOccluding">Minimal Occluding Volume</option>
+              <option value="range">Range</option>
+            </select>
+            <input type="number" id="tbxCuffRange" style="display: none;">
+          </td>
+        </tr>
+        <tr>
+          <td>Oral Care Completed</td>
+          <td></td>
+          <td></td>
+          <td><span id="oralCareOutput"></span></td>
+          <td>
+            <select id="dropOralCare">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Oral Secretions</td>
+          <td></td>
+          <td></td>
+          <td>
+            <p>Amount:</p>
+            <span id="oralAmountOutput"></span>
+            <p>Consistency:</p>
+            <span id="oralConsistOutput"></span>
+            <p>Color:</p>
+            <span id="oralColorOutput"></span>
+          </td>
+          <td>
+            <p>Amount:</p>
+            <select id="dropOralAmount">
+              <option value="null"></option>
+              <option value="copious">Copious</option>
+              <option value="large">Large</option>
+              <option value="moderate">Moderate</option>
+              <option value="small">Small</option>
+              <option value="scant">Scant</option>
+              <option value="none">None</option>
+            </select>
+            
+            <p>Consistency:</p>
+            <option value="null"></option>
+            <select id="dropOralConsistency">
+              <option value="null"></option>
+              <option value="thick">Thick</option>
+              <option value="thin">Thin</option>
+              <option value="normal">Normal</option>
+              <option value="frothy">Frothy</option>
+            </select>
+            
+            <p>Color:</p>
+            <select id="dropOralColor">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="white">White</option>
+              <option value="cream">Cream</option>
+              <option value="yellow">Yellow</option>
+              <option value="green">Green</option>
+              <option value="tan">Tan</option>
+              <option value="red">Red</option>
+              <option value="pink">Pink</option>
+              <option value="brown">Brown</option>
+              <option value="gray">Gray</option>
+              <option value="black">Black</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Tracheal Secretions</td>
+          <td></td>
+          <td></td>
+          <td>
+            <p>Amount:</p>
+            <span id="trachAmountOutput"></span>
+            <p>Consistency:</p>
+            <span id="trachConsistOutput"></span>
+            <p>Color:</p>
+            <span id="trachColorOutput"></span>
+          </td>
+          <td>
+            <p>Amount</p>
+            <select id="dropTrachAmount">
+              <option value="null"></option>
+              <option value="copious">Copious</option>
+              <option value="large">Large</option>
+              <option value="moderate">Moderate</option>
+              <option value="small">Small</option>
+              <option value="scant">Scant</option>
+              <option value="none">None</option>
+            </select>
+            
+            <p>Consistency</p>
+            <select id="dropTrachConsistency">
+              <option value="null"></option>
+              <option value="thick">Thick</option>
+              <option value="thin">Thin</option>
+              <option value="normal">Normal</option>
+              <option value="frothy">Frothy</option>
+            </select>
+            
+            <p>Color</p>
+            <select id="dropTrachColor">
+              <option value="null"></option>
+              <option value="clear">Clear</option>
+              <option value="white">White</option>
+              <option value="cream">Cream</option>
+              <option value="yellow">Yellow</option>
+              <option value="green">Green</option>
+              <option value="tan">Tan</option>
+              <option value="red">Red</option>
+              <option value="pink">Pink</option>
+              <option value="brown">Brown</option>
+              <option value="gray">Gray</option>
+              <option value="black">Black</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <!-- End Airway Assessment Table -->
+      
+      <br>
+      
+      <!-- Begin Ventilator Bundle Table -->
+      <table id="ventBundleTable" class="ventTables">
+        <tr>
+          <th class="ventTableHead">Ventilator Bundle</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">Now</th>
+          <th class="ventTimeCol">Enter New</th>
+        </tr>
+        <tr>
+          <td>HOB &gt; 30&deg;</td>
+          <td></td>
+          <td></td>
+          <td><span id="hobOutput"></span></td>
+          <td>
+            <select id="dropHob">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Daily Sedation Vacation</td>
+          <td></td>
+          <td></td>
+          <td><span id="sedVacationOutput"></span></td>
+          <td>
+            <select id="dropsedVacation">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Assess Weaning Readiness</td>
+          <td></td>
+          <td></td>
+          <td><span id="weanReadyOutput"></span></td>
+          <td>
+            <select id="dropWeanReady">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>PUD Prophylaxis</td>
+          <td></td>
+          <td></td>
+          <td><span id="pudOutput"></span></td>
+          <td>
+            <select id="dropPud">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>DVT Prophylaxis</td>
+          <td></td>
+          <td></td>
+          <td><span id="dvtOutput"></span></td>
+          <td>
+            <select id="dropDvt">
+              <option value="null"></option>
+              <option value="check">&check;</option>
+              <option value="contraindicated">Contraindicated</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <!-- End Ventilator Bundle Table -->
+      
+      <br>
+      
+      <!-- Begin Ventilator Assessment Table -->
+      <table id="ventAssessTable" class="ventTables">
+        <tr>
+          <th class="ventTableHead">Ventilator Assessment</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">[Time]</th>
+          <th class="ventTimeCol">Now</th>
+          <th class="ventTimeCol">Enter New</th>
+        </tr>
+        <tr>
+          <td>Vent/BiPAP</td>
+          <td></td>
+          <td></td>
+          <td><span id="ventBipapOutput"></span></td>
+          <td>
+            <select id="dropVentBipap">
+              <option value="null"></option>
+              <option value="vent">Vent</option>
+              <option value="bipap">BiPAP</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Mode</td>
+          <td></td>
+          <td></td>
+          <td><span id="modeOutput"></span></td>
+          <td>
+            <select id="dropMode">
+              <option value="null"></option>
+              <option value="volumeControl">Volume Control</option>
+              <option value="pressureControl">Pressure Control</option>
+              <option value="simv">SIMV</option>
+              <option value="simvWithPs">SIMV with PS</option>
+              <option value="cpapWithPs">CPAP with PS</option>
+              <option value="cpap">CPAP</option>
+              <option value="biLevel">BiLevel</option>
+              <option value="aprv">APRV</option>
+              <option value="spontaneous">Spontaneous</option>
+              <option value="spontaneousTimed">Spontaneous-timed</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Set Rate</td>
+          <td></td>
+          <td></td>
+          <td><span id="setRateOutput"></span></td>
+          <td>
+            <input type="number" id="tbxSetRate">
+          </td>
+        </tr>
+        <tr>
+          <td>Total Rate</td>
+          <td></td>
+          <td></td>
+          <td><span id="totalRateOutput"></span></td>
+          <td>
+            <input type="number" id="tbxTotalRate">
+          </td>
+        </tr>
+        <tr>
+          <td>Set V<sub><span class="ventSubscripts" style="font-size: .8em;">T</span></sub> &#40;ml&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="setVtOutput"></span></td>
+          <td>
+            <input type="number" id="tbxSetVt">
+          </td>
+        </tr>
+        <tr>
+          <td>Expiratory V<sub><span class="ventSubscripts" style="font-size: .8em;">T</span></sub> &#40;ml&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="expireVtOutput"></span></td>
+          <td>
+            <input type="number" id="tbxExpireVt">
+          </td>
+        </tr>
+        <tr>
+          <td>Spontaneous V<sub><span class="ventSubscripts" style="font-size: .8em;">T</span></sub> &#40;ml&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="spontVtOutput"></span></td>
+          <td>
+            <input type="number" id="tbxSpontVt">
+          </td>
+        </tr>
+        <tr>
+          <td>Exhaled Ve &#40;lpm&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="exhaleVeOutput"></span></td>
+          <td>
+            <input type="number" id="tbxExhaleVe">
+          </td>
+        </tr>
+        <tr>
+          <td>Set PS or PC &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="psPcOutput"></span></td>
+          <td>
+            <input type="number" id="tbxPsPc">
+          </td>
+        </tr>
+        <tr>
+          <td>O<span class="ventSubscripts" style="font-size: .8em;">2</span> &#40;%&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="o2PcntOutput"></span></td>
+          <td>
+            <input type="number" id="tbxo2Pcnt">
+          </td>
+        </tr>
+        <tr>
+          <td>Set IPAP</td>
+          <td></td>
+          <td></td>
+          <td><span id="setIpapOutput"></span></td>
+          <td>
+            <input type="number" id="tbxsetIpap">
+          </td>
+        </tr>
+        <tr>
+          <td>Set PEEP &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="setPeepOutput"></span></td>
+          <td>
+            <input type="number" id="tbxsetPeep">
+          </td>
+        </tr>
+        <tr>
+          <td>Total PEEP &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="totalPeepOutput"></span></td>
+          <td>
+            <input type="number" id="tbxTotalPeep">
+          </td>
+        </tr>
+        <tr>
+          <td>PIP &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="pipOutput"></span></td>
+          <td>
+            <input type="number" id="tbxPip">
+          </td>
+        </tr>
+        <tr>
+          <td>Plateau &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="plateauOutput"></span></td>
+          <td>
+            <input type="number" id="tbxPlateau">
+          </td>
+        </tr>
+        <tr>
+          <td>MAP &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="mapOutput"></span></td>
+          <td>
+            <input type="number" id="tbxMap">
+          </td>
+        </tr>
+        <tr>
+          <td>C<sub><span class="ventSubscripts" style="font-size: .8em;">L</span></sub>-Static &#40;ml/cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="clStaticOutput"></span></td>
+          <td>
+            <input type="number" id="tbxClStatic">
+          </td>
+        </tr>
+        <tr>
+          <td>C<sub><span class="ventSubscripts" style="font-size: .8em;">L</span></sub>-Dynamic &#40;ml/cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="clDynamicOutput"></span></td>
+          <td>
+            <input type="number" id="tbxClDynamic">
+          </td>
+        </tr>
+        <tr>
+          <td>Raw &#40;cmH<span class="ventSubscripts" style="font-size: .8em;">2</span>O/L/sec&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="rawOutput"></span></td>
+          <td>
+            <input type="number" id="tbxRaw">
+          </td>
+        </tr>
+        <tr>
+          <td>Peak Flow &#40;lpm&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="peakFlowOutput"></span></td>
+          <td>
+            <input type="number" id="tbxPeakFlow">
+          </td>
+        </tr>
+        <tr>
+          <td>Waveform</td>
+          <td></td>
+          <td></td>
+          <td><span id="waveOutput"></span></td>
+          <td>
+            <select id="dropWave">
+              <option value="null"></option>
+              <option value="square">Square</option>
+              <option value="descending">Descending</option>
+              <option value="ascending">Ascending</option>
+              <option value="sine">Sine</option>
+              <option value="ramp">Ramp</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Inspiratory Time</td>
+          <td></td>
+          <td></td>
+          <td><span id="inspTimeOutput"></span></td>
+          <td>
+            <input type="number" id="tbxInspTime">
+          </td>
+        </tr>
+        <tr>
+          <td>I:E Ratio &#40;of set rate&#41;</td>
+          <td></td>
+          <td></td>
+          <td><span id="ieRatioOutput"></span></td>
+          <td>
+            <input type="number" id="tbxieRatioLeft">:<input type="number" id="tbxieRatioRight">
+          </td>
+        </tr>
+        <tr>
+          <td>Sensitivity</td>
+          <td></td>
+          <td></td>
+          <td><span id="senseOutput"></span></td>
+          <td>
+            <select id="dropSense">
+              <option value="null"></option>
+              <option value="-0.5">-0.5 cmH20</option>
+              <option value="-1.0">-1.0 cmH2o</option>
+              <option value="-1.5">-1.5 cmH2o</option>
+              <option value="-2.0">-2.0 cmH2o</option>
+              <option value="-2.5">-2.5 cmH20</option>
+              <option value="-3.0">-3.0 cmH2o</option>
+              <option value="-3.5">-3.5 cm H2o</option>
+              <option value="-4.0">-4.0 cmH20</option>
+              <option value="-4.5">-4.5 cmH20</option>
+              <option value="-5.0">-5.0 cm H2o</option>
+              <option value="1lpm">1 lpm</option>
+              <option value="2lpm">2 lpm</option>
+              <option value="3lpm">3 lpm</option>
+              <option value="4lpm">4 lpm</option>
+              <option value="5lpm">5 lpm</option>
+              <option value="other">Other – see progress note</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>All Alarms On &amp; Set</td>
+          <td></td>
+          <td></td>
+          <td><span id="alarmsOutput"></span></td>
+          <td>
+            <input type="checkbox" id="cbxAlarms" value="cbxAlarms">
+          </td>
+        </tr>
+        <tr>
+          <td>Bag/Mask at bedside</td>
+          <td></td>
+          <td></td>
+          <td><span id="bedsideOutput"></span></td>
+          <td>
+            <input type="checkbox" id="cbxBedside" value="cbxBedside">
+          </td>
+        </tr>
+      </table>
+      <!-- End Ventilator Assessment Table -->
+      
+      <button id="button-submit" type="button">Submit</button>
+      <p>
+        <span id="feedback"></span>
+      </p>
+    </form>
+  </main>
+  <script type="text/javascript" src="https://www.wisc-online.com/ARISE_Files/JS/ventilatorJS.js"></script>
+</body>
+</html>
