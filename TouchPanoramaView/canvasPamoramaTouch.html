@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Scene Size-Up Plaque</title>
+  <link rel="stylesheet" type="text/css" href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=1">
+    <style>
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+      
+      input[type=range]::-webkit-slider-thumb {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 5px;
+      }
+      
+      #rangeDiv {
+        text-align: center;
+      }
+    
+    </style>
+  </head>
+  <body class="learningObjectives">
+    <main>
+      <h1>Scene Size-Up</h1>
+      <div>
+        
+        <p>Touch X Start: <span id="touchStartOutput"></span></p>
+        <p>Touch X End: <span id="touchEndOutput"></span></p>
+        <p>Ongoing xPos: <span id="xPosOutput"></span></p>
+        <p>Saved X Pos: <span id="savedXPos"></span></p>
+        <p>Console: <span id="console"></span></p>
+      </div>
+      <br>
+        <canvas class="myCanvas" width="705" height="550" style="border: 1px solid #00FFFF"></canvas>
+        <br>
+        <div id="rangeDiv">
+          <input type="range" id="slider" min="0" max="2342" step="1" value="0" style="width: 690px;">
+        </div>
+    </main>
+    <script>
+      var ctx,
+          xPos = 0,
+          offSet,
+          imageWidth = 3047,
+          imageHeight = 550,
+          imageObject,
+          touchEndPos = 0,
+          touchStartPos = 0,
+          saveEndTouch = 0,
+          beginXPos;
+      
+      var touchStartOutput = document.querySelector("#touchStartOutput");
+      var xPosOutput = document.querySelector("#xPosOutput");
+      var console = document.querySelector("#console");
+      var savedOutput = document.querySelector("#savedXPos");
+      var canvas = document.querySelector(".myCanvas");
+      
+      savedOutput.innerHTML = saveEndTouch;
+      
+      canvas.addEventListener("touchstart", touchStartHandler, false);
+      canvas.addEventListener("touchend", touchEndHandler, false);
+      canvas.addEventListener("touchmove", function (e) {
+        
+        beginXPos = saveEndTouch;
+        
+        console.innerHTML = "beginXPos " + beginXPos;
+        
+        touchMoveHandler(e,ctx);
+        
+      }, false)
+
+      
+      imageObject = new Image();
+      imageObject.src = "https://www.wisc-online.com/ARISE_Files/Images/panoramaSmaller.jpg";
+      
+
+        
+      ctx = document.querySelector(".myCanvas").getContext("2d");
+
+      offSet = xPos % imageWidth;
+
+      ctx.drawImage(imageObject, offSet, 0, imageWidth - offSet, imageHeight, 0, 0, imageWidth - offSet, imageHeight);
+        
+      
+      function touchStartHandler(e) {
+        e.preventDefault();
+        touchStartOutput.innerHTML = e.pageX;
+        
+        touchStartPos = e.pageX;
+      }
+      
+      function touchEndHandler(e) {
+        touchEndOutput.innerHTML = e.pageX;
+        touchEndPos = e.pageX;
+      }
+      
+      function touchMoveHandler(e, ctx) {
+        
+        var touches = e.changedTouches[0];
+        
+        
+        xPos += (touches.pageX - touchStartPos) * -.05;
+        
+        if (xPos <0) {
+          xPos = 0;
+        } else if (xPos > (imageWidth - canvas.width)) {
+          xPos = (imageWidth - canvas.width);
+        }
+        
+        offSet = xPos % imageWidth;
+        
+        ctx.drawImage(imageObject, offSet, 0, imageWidth - offSet, imageHeight, 0, 0, imageWidth - offSet, imageHeight);
+        
+        e.preventDefault();
+
+        console.innerHTML = "xPos: " + xPos;
+        
+      }
+      
+      var ARIS = {};
+      ARIS.ready = function() {
+        
+        ARIS.hook = function() {
+          ARIS.exit();
+        }
+
+      }
+
+    </script>
+  </body>
+</html>
