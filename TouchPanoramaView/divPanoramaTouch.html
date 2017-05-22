@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Scene Size-Up Plaque</title>
+  <link rel="stylesheet" type="text/css" href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=1">
+    <style>
+      #panorama {
+        position: relative;
+        left: 1px;
+      }
+      
+      .panDiv {
+        height: 550px;
+        width: 705px;
+        overflow: hidden;
+      }
+    
+    </style>
+  </head>
+  <body class="learningObjectives">
+    <main>
+      <h1>Scene Size-Up</h1>
+      
+      <div class="panDiv">
+      <img id="panorama" src="https://www.wisc-online.com/ARISE_Files/Images/panoramaSmaller.jpg">
+      </div>
+        <br>
+    </main>
+    <script>
+      var touchStart = 0,
+          xPos = 0,
+          imageWidth = 3047;
+      
+      // Get the integer value of the left position of the panorama image
+      var panorama = document.querySelector("#panorama");
+      var panoramaLeftPos = window.getComputedStyle(panorama).getPropertyValue("left");
+      var panoramaLeftValue = parseInt(panoramaLeftPos);
+      
+      // get the integer value width of the containing div.
+      var panDiv = document.querySelector(".panDiv");
+      var panDivProperty = window.getComputedStyle(panDiv).getPropertyValue("width");
+      var panDivWidth = parseInt(panDivProperty);
+      console.log(panDivWidth);
+      
+      panorama.addEventListener("touchstart", touchStartHandler, false);
+      panorama.addEventListener("touchend", touchEndHandler, false);
+      panorama.addEventListener("touchmove", touchMoveHandler, false);
+
+
+      function touchStartHandler(e) {
+        e.preventDefault();
+        touchStart = e.pageX;
+        panoramaLeftPos = window.getComputedStyle(panorama).getPropertyValue("left");
+        panoramaLeftValue = parseInt(panoramaLeftPos);
+      }
+      
+      function touchEndHandler(e) {
+
+      }
+      
+      function touchMoveHandler(e) {
+        e.preventDefault(); 
+
+        var dist = (e.pageX - touchStart);
+        
+        if (panoramaLeftValue + dist <= 0 && panoramaLeftValue + dist >= panDivWidth - imageWidth) {
+          panorama.style.left = panoramaLeftValue + dist + "px";
+        }
+      
+      }
+      
+      var ARIS = {};
+      ARIS.ready = function() {
+        
+        ARIS.hook = function() {
+          ARIS.exit();
+        }
+
+      }
+
+    </script>
+  </body>
+</html>
