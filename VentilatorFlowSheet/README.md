@@ -61,6 +61,7 @@ This item tracks whether or not the user has submitted Ventilator Flow Sheet inf
 |------------------------|------------------|----------------------------------|
 |Airway/Mask Type        |VentMaskType      |N/A                               |
 |Airway/Mask Size        |VentMaskSize      |N/A                               |
+|ETT Location Number     |VentEttNum        |min_ettNum, max_ettNum            |
 |ETT Location            |VentEttLoc        |N/A                               |
 |ETT Relocated           |VentReloc         |N/A                               |
 |Secure & Patent         |VentSecurePatent  |N/A                               |
@@ -128,6 +129,7 @@ The default setting for "Max Quantity in Inventory" for items in ARIS is 500. Fo
 + VentCLDynamic
 + VentCLStatic
 + VentCuffPressure
++ VentEttNum
 + VentExhaleVe
 + VentExpireVt
 + VentIERatioLeft
