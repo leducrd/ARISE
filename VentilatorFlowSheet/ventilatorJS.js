@@ -31,6 +31,9 @@ var max_temp = parseFloat( lookupGET('max_temp') ) || 0;
 var min_oxygen = parseFloat( lookupGET('min_oxygen') ) || 0;
 var max_oxygen = parseFloat( lookupGET('max_oxygen') ) || 0;
 
+var min_ettNum = parseFloat( lookupGET('min_ettNum') ) || 0;
+var max_ettNum = parseFloat( lookupGET('max_ettNum') ) || 0;
+
 var min_cuffPressure = parseFloat( lookupGET('min_cuffPressure') ) || 0;
 var max_cuffPressure = parseFloat( lookupGET('max_cuffPressure') ) || 0;
 
@@ -215,6 +218,8 @@ function appReady() {
       var maskSize = document.getElementById('dropMaskSize');
       var maskSizeValue = maskSize.options[maskSize.selectedIndex].value;
       
+      var ettNum = document.getElementById('tbxEttNum').value;
+      
       var ettLocation = document.getElementById('dropEttLoc');
       var ettLocationValue = ettLocation.options[ettLocation.selectedIndex].value;
       
@@ -344,6 +349,10 @@ function appReady() {
       
       if (!isNaN(parseFloat(oxygen))) {
         passed = passed && checkFloat('field-oxygen'               , min_oxygen      , max_oxygen      );
+      }
+      
+      if (!isNaN(parseFloat(ettNum))) {
+        passed = passed && checkFloat('tbxEttNum'               , min_ettNum      , max_ettNum      );
       }
 
       if (cuffPressureValue == "range") {
@@ -752,6 +761,13 @@ function appReady() {
           ARIS.setItemCount(maskSize_id, 20);
         } else if (maskSizeValue == "extraLarge") {
           ARIS.setItemCount(maskSize_id, 21);
+        }
+        
+        var ettNum_id = ARIS.cache.idForItemName('VentEttNum');
+        if (isNaN(parseFloat(ettNum))) {
+          ARIS.setItemCount(ettNum_id, notAssessedValue);
+        } else {
+          ARIS.setItemCount(ettNum_id, ettNum);
         }
         
         var ettLocation_id = ARIS.cache.idForItemName('VentEttLoc');
@@ -1596,6 +1612,15 @@ ARIS.ready = function() {
      } else if (maskSize_qty == 21) {
        maskSizeOutput.innerHTML = "Extra Large";
      }
+    
+    var ettNum_id = ARIS.cache.idForItemName('VentEttNum');
+    var ettNum_qty = ARIS.cache.getPlayerItemCount(ettNum_id);
+    var ettNumOutput = document.getElementById("ettNumOutput");
+    if (ettNum_qty == notAssessedValue) {
+      ettNumOutput.innerHTML = "";
+    } else {
+      ettNumOutput.innerHTML = ettNum_qty;
+    }
 
     var ettLocation_id = ARIS.cache.idForItemName('VentEttLoc');
     var ettLocation_qty = ARIS.cache.getPlayerItemCount(ettLocation_id);
