@@ -1,0 +1,376 @@
+<!--
+Created By: Ryan LeDuc
+On: 05/22/2017
+For: Chippewa Valley Technical College ARISE Project
+-->
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Scene Size-Up Plaque</title>
+
+    <style>
+      body {
+        font-family: helvetica;
+      }
+      #cool {
+        border: 1px solid #000000;
+        position: relative;
+        width: 100%;
+        height: 500px;
+      }
+      
+      .dropLoc {
+        background: #ede9f3;
+        border: 1px solid #5f4383;
+        position: absolute;
+        width: 200px;
+        height: 50px;
+        vertical-align: bottom;
+      }
+      
+      #dropLocation1 {
+        position: absolute;
+        left: 400px;
+        top: 20px;
+      }
+      
+      #dropLocation1::before {
+        content: "A.";
+        font-size: 3rem;
+        position: absolute;
+        left: -45px;
+      }
+      
+      #dropLocation2 {
+        left: 400px;
+        top: 100px;
+      }
+      
+      #dropLocation2::before {
+        content: "B.";
+        font-size: 3rem;
+        position: absolute;
+        left: -45px;
+      }
+      
+      #dropLocation3 {
+        left: 400px;
+        top: 180px;
+      }
+      
+      #dropLocation3::before {
+        content: "C.";
+        font-size: 3rem;
+        position: absolute;
+        left: -47px;
+      }
+      
+      #dropLocation4 {
+        left: 400px;
+        top: 260px;
+      }
+      
+      #dropLocation4::before {
+        content: "D.";
+        font-size: 3rem;
+        position: absolute;
+        left: -47px;
+      }
+      
+      #dropLocation5 {
+        left: 400px;
+        top: 340px;
+      }
+      
+      #dropLocation5::before {
+        content: "E.";
+        font-size: 3rem;
+        position: absolute;
+        left: -45px;
+      }
+      
+      ol {
+        font-size: 2rem;
+        position: relative;
+        left: 10px;
+      }
+      
+      ol li {
+        margin: 5px;
+      }
+      
+      .touchObject {
+        position: absolute;
+        width: 165px;
+        height: 30px;
+      }
+      
+      #touch1 {
+        left: 50px;
+        top: 34px;
+        z-index: +1;
+        background: #ff6699;
+        border: 1px solid #ff0066;
+      }
+      
+      #touch2 {
+        left: 50px;
+        top: 77px;
+        z-index: +1;
+        background: #00e673;
+        border: 1px solid #00994d;
+      }
+      
+      #touch3 {
+        left: 50px;
+        top: 120px;
+        z-index: +1;
+        background: #4da6ff;
+        border: 1px solid #004d99;
+      }
+      
+      #touch4 {
+        left: 50px;
+        top: 164px;
+        z-index: +1;
+        background: #ffb84d;
+        border: 1px solid #b36b00;
+      }
+      
+      #touch5 {
+        left: 50px;
+        top: 207px;
+        z-index: +1;
+        background: #9966ff;
+        border: 1px solid #2a0080;
+      }
+      
+      .panDiv {
+        height: 550px;
+        width: 705px;
+        overflow: hidden;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>TouchStart Pos: X: <span id="spanStartX">xx</span> | Y: <span id="spanStartY">xx</span></p>
+      <p>Box End Pos: X: <span id="currentPosX">xx</span> | Y: <span id="currentPosY">xx</span></p>
+      <hr>
+      <p>Drop Location Pos: X: <span id="dropLocX">xx</span> | Y: <span id="dropLocY">xx</span></p>
+      <p>Console: <span id="myConsole">xx</span></p>
+      
+      <div id="cool">
+        
+        <ol id="answers" type="A">
+          <li> </li>
+          <li> </li>
+          <li> </li>
+          <li> </li>
+          <li> </li>
+        </ol>
+        
+        <div id="touch1" class="touchObject" data-match="snake">Danger Noodle</div>
+        <div id="touch2" class="touchObject" data-match="bear">Furry Nope</div>
+        <div id="touch3" class="touchObject" data-match="penguin">Formal Chicken</div>
+        <div id="touch4" class="touchObject" data-match="mantray">Majestic Sea Flap Flap</div>
+        <div id="touch5" class="touchObject" data-match="rabbit">Booplesnoot</div>
+        
+        <div id="dropLocation1" class="dropLoc" data-match="bear">Bear</div>
+        <div id="dropLocation2" class="dropLoc" data-match="mantray">Mantaray</div>
+        <div id="dropLocation3" class="dropLoc" data-match="penguin">Penguin</div>
+        <div id="dropLocation4" class="dropLoc" data-match="snake">Snake</div>
+        <div id="dropLocation5" class="dropLoc" data-match="rabbit">Rabbit</div>
+      </div>
+      
+      <button id="submit">Submit Answer</button> <span id="message"></span>
+<!--      -->
+        <br>
+    </main>
+    <script>
+      // Improvements to be made:
+      //  4. Reduce inBounds functions to one function that checks all
+      //      conditions? Readbility vs. less code.
+      var myConsole = document.getElementById("myConsole");
+      
+      var touchStartX = 0,
+          touchStartY = 0;
+
+      var touchObjLeftValue;
+      var touchObjTopValue;
+      
+      var messageSpan = document.getElementById("message");
+      
+      // get the touch object elements
+      var touchObjectsNodeList = document.querySelectorAll(".touchObject");
+      
+      // get the drop location elements
+      var dropLocNodeList = document.querySelectorAll(".dropLoc");
+      
+      for (var i = 0; i < touchObjectsNodeList.length; i++) {
+        
+        touchObjectsNodeList[i].addEventListener("touchstart", touchStartHandler, false);
+        touchObjectsNodeList[i].addEventListener("touchend", touchEndHandler, false);
+        touchObjectsNodeList[i].addEventListener("touchmove", touchMoveHandler, false);
+      }
+      
+      // grab the button element and attach the event handler
+      var buttonSubmit = document.getElementById("submit");
+      
+      buttonSubmit.addEventListener("click", buttonSubmitHandler, false);
+      
+      function touchStartHandler(e) {
+        e.preventDefault();
+        
+        // save the starting X and Y position to use in the touchMoveHandler as
+        //  the baseline from which the touched object moves.
+        touchObjLeftValue = getLeftPos(e.target);
+        touchObjTopValue = getTopPos(e.target);
+        
+        // used in touchMoveHandler to calcualte the current position of the
+        //   touched element based on the movement distance from the starting
+        //   touch point.
+        touchStartX = e.changedTouches[0].pageX;
+        touchStartY = e.changedTouches[0].pageY;
+      }
+      
+      function touchMoveHandler(e) {
+        e.preventDefault(); 
+
+        var distX = (e.changedTouches[0].pageX - touchStartX);
+        var distY = (e.changedTouches[0].pageY - touchStartY);
+        
+        // use the starting positon of the touch object to calculate the current
+        //  position. Must use values calculated in touchStartHandler. If we 
+        //  tried to use getLeftPos() or getTopPos(), distX and distY would be
+        //  added to the current position rather than the starting position.
+        e.target.style.left = touchObjLeftValue + distX + "px";
+        e.target.style.top = touchObjTopValue + distY + "px";
+      
+      }
+      
+      function touchEndHandler(e) {
+       
+                
+        // check to see if the draggable item is touching the drop location,
+        //  and if so, snap it into and center it in the drop location
+        for (var i = 0; i < dropLocNodeList.length; i++) {
+          
+          if (isInBounds(dropLocNodeList[i], e.target)) {
+
+            setTouchedPosition(dropLocNodeList[i], e.target);
+            break;
+          }
+        }
+      }
+      
+      function buttonSubmitHandler () {
+        
+        if (isCorrect()) {
+          myConsole.innerHTML = "Correct!";
+        } else {
+          myConsole.innerHTML = "Wrong!";
+        }
+        
+      }
+      
+      function isCorrect() {
+        
+        // for each drop location...
+        for (var i = 0; i < dropLocNodeList.length; i++) {
+          
+          // loop through the touch objects
+          for (var x = 0; x < touchObjectsNodeList.length; x++) {
+            
+            // find the matching touch object
+            if (dropLocNodeList[i].dataset.match == touchObjectsNodeList[x].dataset.match) {
+              
+              // see if it is within bounds of the matching drop location
+              if (!isInBounds(dropLocNodeList[i], touchObjectsNodeList[x])) {
+                return false;
+              }
+            }
+          }
+        }
+        return true;
+      }
+      
+      function setTouchedPosition(dropLocation, touchedObject) {
+        
+        touchedObject.style.left = getLeftPos(dropLocation) + ((getWidth(dropLocation) - getWidth(touchedObject)) / 2) + "px";
+        touchedObject.style.top = getTopPos(dropLocation) + ((getHeight(dropLocation) - getHeight(touchedObject)) / 2) + "px";
+        
+      }
+      
+      function isInBounds(dropLocation, touchObject) {
+        
+        if ((leftSideInBounds(dropLocation, touchObject) || rightSideInBounds(dropLocation, touchObject)) && (topInBounds(dropLocation, touchObject) || bottomInBounds(dropLocation, touchObject))) {
+          return true;
+        }
+        return false;
+      }
+      
+      function leftSideInBounds(dropLocation, touchObject) {
+        
+        if ((getLeftPos(touchObject) >= getLeftPos(dropLocation)) && (getLeftPos(touchObject) <= getLeftPos(dropLocation) + getWidth(dropLocation))) {
+          return true;
+        }
+        return false;
+      }
+      
+      function rightSideInBounds(dropLocation, touchObject) {
+        
+        if ((getLeftPos(touchObject) + getWidth(touchObject) >= getLeftPos(dropLocation)) && (getLeftPos(touchObject) + getWidth(touchObject) <= getLeftPos(dropLocation) + getWidth(dropLocation))) {
+          return true;
+        }
+        return false;
+      }
+      
+      function topInBounds(dropLocation, touchObject) {
+        
+        if ((getTopPos(touchObject) >= getTopPos(dropLocation)) && (getTopPos(touchObject) <= getTopPos(dropLocation) + getHeight(dropLocation))) {
+          return true;
+        }
+        return false;
+      }
+      
+      function bottomInBounds(dropLocation, touchObject) {
+        
+        if ((getTopPos(touchObject) + getHeight(touchObject) >= getTopPos(dropLocation)) && (getTopPos(touchObject) + getHeight(touchObject) <= getTopPos(dropLocation) + getHeight(dropLocation))) {
+          return true;
+        }
+        return false;
+      }
+      
+      function getLeftPos(object) {
+        
+        return parseInt(window.getComputedStyle(object).getPropertyValue("left"));
+      }
+      
+      function getTopPos(object) {
+        
+        return parseInt(window.getComputedStyle(object).getPropertyValue("top"));
+      }
+      
+      function getWidth(object) {
+        return parseInt(window.getComputedStyle(object).getPropertyValue("width"));
+      }
+      
+      function getHeight(object) {
+        return parseInt(window.getComputedStyle(object).getPropertyValue("height"));
+      }
+      
+      var ARIS = {};
+      ARIS.ready = function() {
+        
+        ARIS.hook = function() {
+          ARIS.exit();
+        };
+
+      };
+
+    </script>
+  </body>
+</html>
