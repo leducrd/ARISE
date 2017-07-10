@@ -3,7 +3,7 @@
 By: Greg Cedarblade 
 
 Created:05/29/17  
-Updated:06/08/17
+Updated:07/10/17
 
 Languages: PHP, HTML, CSS, JavaScript, JQuery
 
@@ -21,7 +21,10 @@ Two parts of code that need to be updated per scenario:
 
 1. Auto-complete source
 
-   * This is what will populate a drop down list in the form when the user types and they are able to select from it. Be careful with spelling, if these don't match with what is in the medication list array for approved medications for the scenario then the user will not be able to add it.
+   * This populates a drop-down list associated with the Medication text field that appears when the user begins typing. Users can then select the medication they want, and it will auto-complete the entry.
+
+   * Medications can be typed free-form, but medication names are case sensitive and spelling must match what is in the approved medication $ourDrugs array, or the customization will not add the medication.
+   
       ```jquery
       $('#drugName').autocomplete({
         source: [ 'medication1 someDosage', 'medication2 someDosage', etc..]
