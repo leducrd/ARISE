@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+  INSTRUCTIONS FOR FORM:
+    1. Only edit the HTML
+    2. Make sure you give all checkboxes have an id that matches exact spelling and capitalization of an item in ARIS.
+-->
+<html lang="en-us">
+<head>
+  <meta charset="utf-8" />
+  <title>ARIS Checklist</title>
+  <link rel="stylesheet" type="text/css" href="https://www.mysite.com/css/styles.css">
+  <style>
+    input[type='checkbox'] {
+      display: block;
+      width: 25px;
+      height: 25px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prenatal Visit Checklist</h1>
+    <section>
+      <table><!-- Checklist Table -->
+        <thead>
+          <tr>
+            <th>Initial Visit</th>
+            <th>Completed</th> 
+          </tr>
+        <thead>
+        <tbody>
+          <tr>
+            <td>Weight and BMI</td>
+            <td><input type="checkbox" id="chk1"></td>
+          </tr>
+          <tr>
+            <td>VS:  BP, temp, RR, HR, O2 sat</td>
+            <td><input type="checkbox" id="chk2"></td> 
+          </tr>
+          <tr>
+            <td>Health history</td>
+            <td><input type="checkbox" id="chk3"></td> 
+          </tr>
+          <tr>
+            <td>Medication Reconciliation</td>
+            <td><input type="checkbox" id="chk4"></td> 
+          </tr>
+        </tbody>
+      </table><!-- End of Checklist Table -->
+      <br>
+      
+    </section>
+  </main>
+  <script type="text/javascript">
+    var checkBoxNodeList = document.querySelectorAll('input[type="checkbox"]');
+
+    var ARIS = {};
+    
+    ARIS.ready = function() {
+      
+      for (var i = 0; i < checkBoxNodeList.length; i++) {
+
+        checkBoxNodeList[i].addEventListener("click", handleCheck, false);
+       
+        var checkBoxItem_id = ARIS.cache.idForItemName(checkBoxNodeList[i].id); 
+        var checkBoxItem_qty = ARIS.cache.getPlayerItemCount(checkBoxItem_id);
+        
+        if (checkBoxItem_qty == 1) {
+        
+          checkBoxNodeList[i].checked = true;
+        } 
+      } 
+    };
+
+    function handleCheck(e) {
+      
+      var checkBoxItem_id = ARIS.cache.idForItemName(e.target.id);
+      
+      if (e.target.checked) {
+        ARIS.setItemCount(checkBoxItem_id, 1);
+      } else {
+        ARIS.setItemCount(checkBoxItem_id, 0);
+      }
+    }
+  </script>
+</body>
+</html>
