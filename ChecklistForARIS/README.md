@@ -1,10 +1,10 @@
 # Checklists in ARIS
 ### Documentation and Tutorial for use
-By: Ryan LeDuc
-Created:08/17/2017
-Updated:08/17/2017
-Languages: Javascript, HTML, CSS
-Developed for the Act 4 Healthcare ARISE project, for use in ARISE simulation scenarios involving the need to keep track of a list of tasks.
+By: Ryan LeDuc  
+Created:08/17/2017  
+Updated:08/17/2017  
+Languages: Javascript, HTML, CSS  
+Developed for the Act 4 Healthcare ARISE project, for use in ARISE simulation scenarios involving the need to keep track of a list of tasks.  
 
 ## Features
 Allows users to check or uncheck a checkbox to keep track of completion of a list of tasks.
