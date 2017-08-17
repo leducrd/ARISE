@@ -28,7 +28,7 @@ There are many different ways to make a checklist. In ARISE we used tables due t
             <th>Column Header</th>
             <th>Column Header</th> 
           </tr>
-        <thead>
+        </thead>
         <tbody>
           <tr>
             <td>Weight and BMI</td>
