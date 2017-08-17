@@ -21,7 +21,7 @@ There are many different ways to make a checklist. In ARISE we used tables due t
 ![alt text](https://github.com/leducrd/ARISE/blob/master/ChecklistForARIS/checklistUnstyled.PNG?raw=true "Unstyled Checklist")
 
 **And the full code for the table:**
-```HTML
+```html
 	<table>
         <thead>
           <tr>
