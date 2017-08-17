@@ -17,7 +17,7 @@ There are two important attributes in this small bit of HTML code that are requi
 * **id** each input MUST have a UNIQUE id. In this example we simply used "chk1", so that in other parts of the code (Css, JavaScript) it's obvious that we are working with a checkbox. The id can be whatever name you would like **as long the id is spelled and capitalized the same as an item in ARIS.** (more on this later)
 
 ### _Making a checklist_
-There are many different ways to make a checklist. In ARISE we used tables due to design specifications. Using an HTML table to organize the list items and checkboxes we get an output that looks like this:
+There are many different ways to make a checklist. In ARISE we used tables due to design specifications. Using an HTML table to organize the list items and checkboxes we get an output that looks like this:  
 ![alt text](https://github.com/leducrd/ARISE/blob/master/ChecklistForARIS/checklistUnstyled.PNG?raw=true "Unstyled Checklist")
 
 **And the full code for the table:**
@@ -52,7 +52,7 @@ There are many different ways to make a checklist. In ARISE we used tables due t
 * To make a larger or shorter checklist, add or delete a set of <tr></tr> tags and anything in between them.
 
 ## CSS
-The default checkboxes are small and hard to tap. Using CSS we can center them and make them bigger and easier to tap:
+The default checkboxes are small and hard to tap. Using CSS we can center them and make them bigger and easier to tap:  
 ![alt text](https://github.com/leducrd/ARISE/blob/master/ChecklistForARIS/checklistBigbox.PNG?raw=true "Unstyled Checklist")
 ```css
 <style>
