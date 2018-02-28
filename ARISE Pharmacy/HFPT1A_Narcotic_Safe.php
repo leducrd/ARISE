@@ -17,7 +17,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <title>Narcotic Safe Page HFPT1A</title>
-    <link rel="stylesheet" type="text/css" href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=pasadsdsds25235h">
+    <link rel="stylesheet" type="text/css" href=".../CSS/AriseMainCSS.css?random=pasadsdsds25235h">
 </head>
 <style>
     button {
@@ -30,7 +30,7 @@ session_start();
 </style>
 <body style="text-align: center;" id="body">
 <p style="text-align: center;">Tap on the drugs you wish to select and when done selecting click "Add" to add to order</p>
-<img src="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/Pharmacy--Shelves-Controlled-Substances.png" width="100%" class="map" usemap="#features" id="drugShelfImage">
+<img src=".../PharmTechCustomization/HFPT1A/Pharmacy--Shelves-Controlled-Substances.png" width="100%" class="map" usemap="#features" id="drugShelfImage">
 <map name="features" id="map">
     <area id="drug0"  shape="rect" coords="0,0,241,281">
     <area id="drug1"  shape="rect" coords="241,0,482,281">
@@ -57,7 +57,7 @@ session_start();
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.wisc-online.com/ARISE_Files/JS/fastClickJS.js"></script>
+<script type="text/javascript" src=".../JS/fastClickJS.js"></script>
 <script type="text/javascript">
 
     var body = document.querySelector('#body');
@@ -159,7 +159,7 @@ session_start();
 
         var checkMark = document.createElement('div');
 
-        checkMark.style.backgroundImage = 'url("https://www.wisc-online.com/ARISE_Files/Experimental/Hot%20Spot/Pharm_Tech/check-mark_03.png")';
+        checkMark.style.backgroundImage = 'url(".../Experimental/Hot%20Spot/Pharm_Tech/check-mark_03.png")';
         checkMark.style.backgroundRepeat = 'no-repeat';
         checkMark.style.float = 'right';
         checkMark.style.width = 57 + 'px';
