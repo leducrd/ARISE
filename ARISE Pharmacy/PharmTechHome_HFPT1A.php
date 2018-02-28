@@ -8,7 +8,7 @@ if(!isset($_SESSION)) {
 <head>
     <meta charset="utf-8">
     <title>ARISE Pharmacy Home</title>
-    <link rel="stylesheet" type="text/css" href="https://www.wisc-online.com/ARISE_Files/CSS/AriseMainCSS.css?random=pasadsdsds25235h">
+    <link rel="stylesheet" type="text/css" href=".../CSS/AriseMainCSS.css?random=pasadsdsds25235h">
     <style>
         button {
             float: none;
@@ -138,33 +138,33 @@ if(!isset($_SESSION)) {
 </head>
 <body id="body">
 
-<img src="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/Pharmacy-Floorplan.png" width="100%">
+<img src=".../PharmTechCustomization/Pharmacy-Floorplan.png" width="100%">
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Tablets_A_2_F.php" class="shelf" id="tabAF">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Tablets_A_2_F.php" class="shelf" id="tabAF">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Tablets_G_2_L.php" class="shelf" id="tabGL">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Tablets_G_2_L.php" class="shelf" id="tabGL">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Tablets_M_2_R.php" class="shelf" id="tabMR">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Tablets_M_2_R.php" class="shelf" id="tabMR">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Tablets_S_2_Z.php" class="shelf" id="tabSZ">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Tablets_S_2_Z.php" class="shelf" id="tabSZ">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Liquids.php" class="shelf" id="liquids">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Liquids.php" class="shelf" id="liquids">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Birth_Control.php" class="shelf" id="contraceptives">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Birth_Control.php" class="shelf" id="contraceptives">&nbsp;</a>
 
 <a href="#" class="shelf locked" id="controlled">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Diabetic_Supplies.php" class="shelf" id="diabetic">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Diabetic_Supplies.php" class="shelf" id="diabetic">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Refrigerator.php" class="shelf" id="fridge">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Refrigerator.php" class="shelf" id="fridge">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Topicals.php" class="shelf" id="topicals">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Topicals.php" class="shelf" id="topicals">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Suppositories.php" class="shelf" id="suppositories">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Suppositories.php" class="shelf" id="suppositories">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Inhalants.php" class="shelf" id="inhalants">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Inhalants.php" class="shelf" id="inhalants">&nbsp;</a>
 
-<a href="https://www.wisc-online.com/ARISE_Files/PharmTechCustomization/HFPT1A/HFPT1A_Patches.php" class="shelf" id="patches">&nbsp;</a>
+<a href=".../PharmTechCustomization/HFPT1A/HFPT1A_Patches.php" class="shelf" id="patches">&nbsp;</a>
 
 </body>
 <?php
